@@ -44,10 +44,44 @@ void listar_chamados(Chamado chamados[], int total) {
         printf("\n--- Chamado %d ---\n", chamados[i].id);
         printf("Solicitante: %s\n", chamados[i].solicitante);
         printf("Descricao: %s\n", chamados[i].descricao);
-        printf("Prioridade: %d\n", chamados[i].prioridade);
-        printf("Status: %d\n", chamados[i].status);
+        const char *prioridades[] = {"", "Baixa", "Media", "Alta"};
+        const char *status[] = {"Aberto", "Em andamento", "Resolvido"};
+
+        printf("Prioridade: %s\n", prioridades[chamados[i].prioridade]);
+        printf("Status: %s\n", status[chamados[i].status]);
     }
 }
+
+void atualizar_status(Chamado chamados[], int total) {
+    int id, novo;
+
+    if (total == 0) {
+        printf("Nenhum chamado registrado.\n");
+        return;
+    }
+
+    printf("Numero do chamado: ");
+    scanf("%d", &id);
+
+    if (id < 1 || id > total) {
+        printf("Chamado nao encontrado.\n");
+        return;
+    }
+
+    printf("Novo status (0=Aberto 1=Em andamento 2=Resolvido): ");
+    scanf("%d", &novo);
+
+
+    if (novo < 0 || novo > 2) {
+        printf("Status invalido.\n");
+        return;
+    }
+
+    chamados[id - 1].status = novo;
+
+    printf("Status do chamado %d atualizado!\n", id);
+}
+
 
 
 int main() {
@@ -59,6 +93,7 @@ int main() {
         printf("\n=== SISTEMA DE CHAMADOS ===\n");
         printf("1 - Abrir chamado\n");
         printf("2 - Listar chamados\n");
+        printf("3 - Atualizar status\n");
         printf("0 - Sair\n");
         printf("Escolha: ");
         scanf("%d", &opcao);
@@ -66,6 +101,7 @@ int main() {
         switch (opcao) {
             case 1: abrir_chamado(chamados, &total); break;
             case 2: listar_chamados(chamados, total); break;
+            case 3: atualizar_status(chamados, total); break;
             case 0: printf("Saindo...\n"); break;
             default: printf("Opcao invalida.\n");
         }
