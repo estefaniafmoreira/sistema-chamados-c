@@ -7,7 +7,7 @@ Aplicação de terminal para registrar e acompanhar chamados de suporte de TI, d
 - [x] Abrir chamado (solicitante, descrição, prioridade)
 - [x] Listar chamados
 - [x] Atualizar status (aberto, em andamento, resolvido)
-- [ ] Salvar e carregar dados em arquivo
+- [x] Salvar e carregar dados em arquivo
 
 ## Tecnologias
 - Linguagem C
