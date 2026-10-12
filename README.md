@@ -2,6 +2,8 @@
 
 Aplicação de terminal para registrar e acompanhar chamados de suporte de TI, desenvolvida em linguagem C.
 
+![Print do programa](PRINT.png)
+
 ## Funcionalidades
 - [x] Menu interativo
 - [x] Abrir chamado (solicitante, descrição, prioridade)
