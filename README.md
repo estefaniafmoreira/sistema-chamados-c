@@ -5,7 +5,7 @@ Aplicação de terminal para registrar e acompanhar chamados de suporte de TI, d
 ## Funcionalidades
 - [x] Menu interativo
 - [x] Abrir chamado (solicitante, descrição, prioridade)
-- [ ] Listar chamados
+- [x] Listar chamados
 - [ ] Atualizar status (aberto, em andamento, resolvido)
 - [ ] Salvar e carregar dados em arquivo
 
