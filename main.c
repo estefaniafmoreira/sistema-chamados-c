@@ -82,11 +82,39 @@ void atualizar_status(Chamado chamados[], int total) {
     printf("Status do chamado %d atualizado!\n", id);
 }
 
+void salvar_chamados(Chamado chamados[], int total) {
+    FILE *f = fopen("chamados.txt", "w");
+    if (f == NULL) {
+        printf("Erro ao salvar.\n");
+        return;
+    }
+    for (int i = 0; i < total; i++) {
+        fprintf(f, "%d;%s;%s;%d;%d\n", chamados[i].id,
+                chamados[i].solicitante, chamados[i].descricao,
+                chamados[i].prioridade, chamados[i].status);
+    }
+    fclose(f);
+}
 
+int carregar_chamados(Chamado chamados[]) {
+    FILE *f = fopen("chamados.txt", "r");
+    if (f == NULL) return 0;
+
+    int total = 0;
+    while (total < MAX_CHAMADOS &&
+           fscanf(f, "%d;%49[^;];%199[^;];%d;%d\n",
+                  &chamados[total].id, chamados[total].solicitante,
+                  chamados[total].descricao, &chamados[total].prioridade,
+                  &chamados[total].status) == 5) {
+        total++;
+    }
+    fclose(f);
+    return total;
+}
 
 int main() {
     Chamado chamados[MAX_CHAMADOS];
-    int total = 0;
+    int total = carregar_chamados(chamados);
     int opcao;
 
     do {
@@ -99,9 +127,9 @@ int main() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1: abrir_chamado(chamados, &total); break;
+            case 1: abrir_chamado(chamados, &total); salvar_chamados(chamados, total);break;
             case 2: listar_chamados(chamados, total); break;
-            case 3: atualizar_status(chamados, total); break;
+            case 3: atualizar_status(chamados, total); salvar_chamados(chamados, total); break;
             case 0: printf("Saindo...\n"); break;
             default: printf("Opcao invalida.\n");
         }
