@@ -33,6 +33,22 @@ void abrir_chamado(Chamado chamados[], int *total) {
 
     printf("Chamado %d aberto com sucesso!\n", c.id);
 }
+ 
+void listar_chamados(Chamado chamados[], int total) {
+    if (total == 0) {
+        printf("Nenhum chamado registrado.\n");
+        return;
+    }
+
+    for (int i = 0; i < total; i++) {
+        printf("\n--- Chamado %d ---\n", chamados[i].id);
+        printf("Solicitante: %s\n", chamados[i].solicitante);
+        printf("Descricao: %s\n", chamados[i].descricao);
+        printf("Prioridade: %d\n", chamados[i].prioridade);
+        printf("Status: %d\n", chamados[i].status);
+    }
+}
+
 
 int main() {
     Chamado chamados[MAX_CHAMADOS];
@@ -49,7 +65,7 @@ int main() {
 
         switch (opcao) {
             case 1: abrir_chamado(chamados, &total); break;
-            case 2: printf("Em construcao...\n"); break;
+            case 2: listar_chamados(chamados, total); break;
             case 0: printf("Saindo...\n"); break;
             default: printf("Opcao invalida.\n");
         }
