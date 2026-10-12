@@ -11,6 +11,29 @@ typedef struct {
     int status;     // 0=aberto 1=andamento 2=resolvido
 } Chamado;
 
+void abrir_chamado(Chamado chamados[], int *total) {
+    Chamado c;
+    c.id = *total + 1;
+
+    getchar();
+    printf("Nome do solicitante: ");
+    fgets(c.solicitante, 50, stdin);
+    c.solicitante[strcspn(c.solicitante, "\n")] = 0;
+
+    printf("Descricao do problema: ");
+    fgets(c.descricao, 200, stdin);
+    c.descricao[strcspn(c.descricao, "\n")] = 0;
+
+    printf("Prioridade (1=baixa 2=media 3=alta): ");
+    scanf("%d", &c.prioridade);
+
+    c.status = 0;
+    chamados[*total] = c;
+    (*total)++;
+
+    printf("Chamado %d aberto com sucesso!\n", c.id);
+}
+
 int main() {
     Chamado chamados[MAX_CHAMADOS];
     int total = 0;
@@ -25,7 +48,7 @@ int main() {
         scanf("%d", &opcao);
 
         switch (opcao) {
-            case 1: printf("Em construcao...\n"); break;
+            case 1: abrir_chamado(chamados, &total); break;
             case 2: printf("Em construcao...\n"); break;
             case 0: printf("Saindo...\n"); break;
             default: printf("Opcao invalida.\n");
